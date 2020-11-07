@@ -1,0 +1,66 @@
+import { getSpecialAttacks } from '../special'
+import { test } from "@jest/globals";
+
+test('should be special', () => {
+    const character = Object.defineProperty(
+        {
+            name: 'Лучник',
+            type: 'Bowman',
+            health: 50,
+            level: 3,
+            attack: 40,
+            defence: 10,
+            special: [
+                {
+                    id: 8,
+                    name: 'Двойной выстрел',
+                    icon: 'http://...',
+                    description: 'Двойной выстрел наносит двойной урон'
+                },
+                {
+                    id: 9,
+                    name: 'Нокаутирующий удар',
+                    icon: 'http://...'
+                    // <- обратите внимание, описание "засекречено"
+                }
+            ]
+        },
+        "special",
+        { enumerable: false },
+    )
+
+    expect(getSpecialAttacks(
+        character,
+        'special',
+        'description')).toEqual(
+            [
+                {
+                    id: 8,
+                    name: 'Двойной выстрел',
+                    icon: 'http://...',
+                    description: 'Двойной выстрел наносит двойной урон'
+                },
+                {
+                    id: 9,
+                    name: 'Нокаутирующий удар',
+                    icon: 'http://...',
+                    description: 'Description is unavailable'
+                }
+            ]
+        )
+
+    const newCharacter = {
+            name: 'Лучник',
+            type: 'Bowman',
+            health: 50,
+            level: 3,
+            attack: 40,
+            defence: 10,
+            }
+
+    expect(getSpecialAttacks(
+        newCharacter,
+        'special',
+        'description')).toStrictEqual(["Hero doesn't have any special attacks..."])
+
+})
