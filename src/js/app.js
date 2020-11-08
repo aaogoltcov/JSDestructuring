@@ -31,6 +31,6 @@ const character = Object.defineProperty(
 
 console.log(character)
 
-console.log(getSpecialAttacks(character, 'special', 'description'))
+console.log(getSpecialAttacks(character))
 
 

@@ -29,10 +29,7 @@ test('should be special', () => {
         { enumerable: false },
     )
 
-    expect(getSpecialAttacks(
-        character,
-        'special',
-        'description')).toEqual(
+    expect(getSpecialAttacks(character)).toEqual(
             [
                 {
                     id: 8,
@@ -44,7 +41,7 @@ test('should be special', () => {
                     id: 9,
                     name: 'Нокаутирующий удар',
                     icon: 'http://...',
-                    description: 'Description is unavailable'
+                    description: "Description is unavailable..."
                 }
             ]
         )
@@ -58,9 +55,6 @@ test('should be special', () => {
             defence: 10,
             }
 
-    expect(getSpecialAttacks(
-        newCharacter,
-        'special',
-        'description')).toStrictEqual(["Hero doesn't have any special attacks..."])
+    expect(getSpecialAttacks(newCharacter)).toStrictEqual("Hero doesn't have any special attacks...")
 
 })
